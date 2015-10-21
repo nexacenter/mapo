@@ -1,13 +1,20 @@
 var fs = require('fs');
 
-var orgArray = [];
 
-//controlla che non esista già un file con le organizzazioni, se esiste popola l'array
+var cleanTelefono = function (number) {
+    return number //TODO fai la pulizia
+}
 
-var isEmpty = function (obj) {
-    if (Object.keys(obj).length)
-        return 0;
-    return 1;
+var cleanFields = function (org) {
+    //spesso nel campo id vi è un url ma non esiste il campo link
+    org.link = org.id;
+
+    if (org.telefono !== undefined)
+        org.telefono = cleanTelefono(org.telefono);
+    if (org.fax !== undefined)
+        org.fax = cleanTelefono(org.fax);
+
+    return org;
 }
 
 var removeEmptyFields = function (obj) {
@@ -16,6 +23,12 @@ var removeEmptyFields = function (obj) {
             delete obj[property];
     }
     return obj;
+}
+
+var isEmpty = function (obj) {
+    if (Object.keys(obj).length)
+        return 0;
+    return 1;
 }
 
 var alreadyExist = function (obj) {
@@ -35,23 +48,8 @@ var mergeWith = function (index, obj) {
     }
 }
 
-var cleanTelefono = function (number) {
-    return number //TODO fai la pulizia
-}
-
-var cleanFields = function (org) {
-    //spesso nel campo id vi è un url ma non esiste il campo link
-    org.link = org.id;
-
-    if (org.telefono !== undefined)
-        org.telefono = cleanTelefono(org.telefono);
-    if (org.fax !== undefined)
-        org.fax = cleanTelefono(org.fax);
-
-    return org;
-}
-
-
+//TODO controlla che non esista già un file con le organizzazioni, se esiste popola l'array
+var orgArray = [];
 var wholeJson = JSON.parse(fs.readFileSync("data/appuntamenti.json", "utf-8"));
 
 wholeJson.forEach(function (e) {
@@ -59,16 +57,13 @@ wholeJson.forEach(function (e) {
     org = removeEmptyFields(org);
 
     if (!isEmpty(org)) {
-console.log(org);
         //controllo se questa organizzazione è già presente nel vettore
         if (alreadyExist(org) !== 0) {
             //se è presente cerco di unire eventuali campi extra o discordanti
             mergeWith(alreadyExist(org) - 1, org);
-console.log("merged");
         } else {
             //se non è presente la aggiungo assegnando un nuovo identificativo
             org.id = orgArray.length + 1;
-console.log(org.id);
             orgArray.push(org);
         }
     }
