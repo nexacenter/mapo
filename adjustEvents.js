@@ -77,6 +77,7 @@ eventJson.forEach(function (e) {
     if (e.foto != undefined && e.foto !== "")
         e.foto = e.urlComune + "/"+ e.foto;
     e.id = "http://mapo.nexacenter.org/id/eventi/" + e.id;
+    e.categoria = "http://mapo.nexacenter.org/id/eventi/categorie/" + e.categoria;
     eventArray.push(e);
 });
 
