@@ -69,14 +69,14 @@ eventJson.forEach(function (e) {
         } else {
             //se non è presente la aggiungo assegnando un nuovo identificativo
             var i = orgArray.length + 1;
-            org.id = "mapo/organizzazioni/" + i;
+            org.id = "organizzazioni/" + i;
             orgArray.push(org);
             e.organizzazione = org.id;
         }
     }
     if (e.foto != undefined && e.foto !== "")
         e.foto = e.urlComune + "/"+ e.foto;
-    e.id = "mapo/eventi/" + e.id;
+    e.id = "eventi/" + e.id;
     eventArray.push(e);
 });
 
