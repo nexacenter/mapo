@@ -35,7 +35,7 @@ var alreadyExist = function (obj) {
     for (var i = 0; i < orgArray.length; i++) {
         //per ora controllo solo la concordanza del sito web
         if (obj.link !== undefined && obj.link === orgArray[i].link)
-            return orgArray[i].id.split("/")[2];
+            return orgArray[i].id.split("/")[5];
     }
     return 0;
 }
@@ -69,14 +69,14 @@ eventJson.forEach(function (e) {
         } else {
             //se non è presente la aggiungo assegnando un nuovo identificativo
             var i = orgArray.length + 1;
-            org.id = "organizzazioni/" + i;
+            org.id = "http://mapo.nexacenter.org/id/organizzazioni/" + i;
             orgArray.push(org);
             e.organizzazione = org.id;
         }
     }
     if (e.foto != undefined && e.foto !== "")
         e.foto = e.urlComune + "/"+ e.foto;
-    e.id = "eventi/" + e.id;
+    e.id = "http://mapo.nexacenter.org/id/eventi/" + e.id;
     eventArray.push(e);
 });
 
