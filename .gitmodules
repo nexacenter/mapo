@@ -1,0 +1,3 @@
+[submodule "datathlon"]
+	path = datathlon
+	url = git@github.com:nexacenter/datathlon.git
