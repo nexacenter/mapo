@@ -22,6 +22,6 @@ java -jar triplifier-0.1.jar data/eventi.json data/model.json id
 
 #carica gli rdf sull'endpoint
 echo "> Loading data to the endpoint"
-curl -XPOST --data-binary update="LOAD <file://output/rdf.nt>" http://localhost:9999/bigdata/namespace/mapo/sparql
+curl -XPOST --data-binary update="LOAD <file:///var/www/mapo.nexacenter.org/mapo/output/rdf.nt>" http://localhost:9999/bigdata/namespace/mapo/sparql
 
 echo "Finished at "$(date +%c)
