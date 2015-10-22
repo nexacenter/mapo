@@ -1,0 +1,21 @@
+[
+    {
+        "dataType" : [
+           {
+           }
+        ]
+    },
+    {
+        "propertiesToMap": [
+            {
+                "id": "notSet",
+                "nome": "http://www.w3.org/2000/01/rdf-schema#label",
+                "link": "https://schema.org/url",
+                "email": "https://schema.org/email",
+                "telefono": "http://schema.org/telephone",
+                "cellulare": "http://schema.org/telephone",
+                "fax": "https://schema.org/faxNumber"
+            }
+        ]
+    }
+]   
