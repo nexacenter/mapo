@@ -8,7 +8,7 @@ echo "Start at "$(date +%c)
 
 #lavora sui json scaricati
 echo "> Working on events JSON"
-nodejs adjustEvents.js
+node adjustEvents.js
 
 #converte caratteri unicode in HTML
 echo "> Converting unicode chars"
@@ -17,11 +17,11 @@ rm data/eventi.json
 mv eventi-temp.json data/eventi.json
 
 #lancia il triplificatore
-#echo "> Triplifing"
-#TODO
+echo "> Triplifing"
+java -jar triplifier-0.1.jar data/eventi.json data/model.json id
 
 #carica gli rdf sull'endpoint
-#echo "> Loading data to the endpoint"
-#TODO
+echo "> Loading data to the endpoint"
+curl -XPOST --data-binary update="LOAD <file://output/rdf.nt>" http://localhost:9999/bigdata/namespace/mapo/sparql
 
 echo "Finished at "$(date +%c)
