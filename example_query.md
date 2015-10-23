@@ -1,6 +1,6 @@
 ##Query SPARQL di esempio
 
-###Gli eventi che partono in una certa data
+###Eventi che partono in una certa data
 ```
 select ?label ?uri
 where {?uri <https://schema.org/startDate> "2015-09-27"^^xsd:date. 
@@ -19,4 +19,22 @@ select ?org (count(?org) as ?n)
 where {?a <https://schema.org/organizer> ?org}
 group by ?org
 order by desc (?n)
+```
+
+###Eventi che si svolgono in comuni sopra i 600m
+```
+select distinct ?evento ?comune ?elev
+with {
+    select distinct ?url where {?a <http://mapo.nexacenter.org/id/eventi/hasUrlComune> ?url .}
+} as %url
+where {
+    include %url
+    bind(uri(?url)as ?uri)
+    service <http://dbpedia.org/sparql> {
+        ?comune foaf:homepage ?uri .
+        ?comune <http://dbpedia.org/property/elevationM> ?elev
+    }
+    ?evento <http://mapo.nexacenter.org/id/eventi/hasUrlComune> ?url
+    FILTER (?elev >= 600)
+}
 ```
