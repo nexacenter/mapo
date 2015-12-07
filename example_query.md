@@ -7,10 +7,14 @@ where {?uri <https://schema.org/startDate> "2015-09-27"^^xsd:date.
        ?uri rdfs:label ?label}
 ```
 
-###Tutte le tipologie di eventi
+###Tutte le tipologie di eventi per numero di occorrenze
 ```
-select distinct ?type
-where {?a rdf:type ?type}
+SELECT distinct ?t (count(?t) as ?c)
+WHERE {
+    ?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?t.
+}
+GROUP BY (?t)
+ORDER BY DESC (?c)
 ```
 
 ###Organizzazioni per numero di eventi
