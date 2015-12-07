@@ -13,6 +13,7 @@
         "propertiesToMap": [
             {
                 "id": "notSet",
+                "comune": "http://dbpedia.org/ontology/city",
                 "urlComune": "http://mapo.nexacenter.org/id/eventi/hasUrlComune",
                 "categoria": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
                 "dataInizio": "https://schema.org/startDate",
