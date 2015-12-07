@@ -1,0 +1,19 @@
+[
+    {
+        "dataType" : [
+           {
+           }
+        ]
+    },
+    {
+        "propertiesToMap": [
+            {
+                "id": "notSet",
+                "nome": "http://www.w3.org/2000/01/rdf-schema#label",
+                "url": "https://schema.org/url",
+                "provincia": "http://dbpedia.org/ontology/province",
+                "codIstat": "http://dbpedia.org/ontology/istat"
+            }
+        ]
+    }
+]   
