@@ -40,6 +40,14 @@ var alreadyExist = function (obj) {
     return 0;
 }
 
+var comuneExist = function (code) {
+    for (var i = 0; i < comuniArray.length; i++) {
+        if (code === comuniArray[i].codIstat)
+            return 1;
+    }
+    return 0;
+}
+
 var mergeWith = function (index, obj) {
     //se orgArray[index] è vuoto allora riempi con il relativo valore di obj
     for (p in obj) {
@@ -51,6 +59,7 @@ var mergeWith = function (index, obj) {
 //TODO controlla che non esista già un file con le organizzazioni, se esiste popola l'array
 var orgArray = [];
 var eventArray = [];
+var comuniArray = [];
 var eventJson = JSON.parse(fs.readFileSync("data/appuntamenti.json", "utf-8"));
 
 eventJson.forEach(function (e) {
@@ -74,15 +83,31 @@ eventJson.forEach(function (e) {
             e.organizzazione = org.id;
         }
     }
+
+
+    var codIstat = e.comune.codIstat;
+    if (!comuneExist(codIstat)) {
+        var comune = {};
+        comune.nome = e.comune.nome;
+        comune.id = "http://mapo.nexacenter.org/id/comuni/" + codIstat;
+        comune.url = e.comune.url;
+        comune.provincia = e.comune.provincia;
+        comune.codIstat = e.comune.codIstat;
+        comuniArray.push(comune);
+    }
+
+
     if (e.foto != undefined && e.foto !== "")
         e.foto = e.urlComune + "/"+ e.foto;
     e.id = "http://mapo.nexacenter.org/id/eventi/" + e.id;
     e.categoria = "http://mapo.nexacenter.org/id/eventi/categorie/" + e.categoria.replace(/ /g, '_');
+    e.comune = "http://mapo.nexacenter.org/id/comuni/" + codIstat;
     eventArray.push(e);
 });
 
 fs.writeFileSync("data/eventi.json", JSON.stringify(eventArray, null, 4));
 fs.writeFileSync("data/organizzazioni.json", JSON.stringify(orgArray, null, 4));
+fs.writeFileSync("data/comuni.json", JSON.stringify(comuniArray, null, 4));
 
 
 
