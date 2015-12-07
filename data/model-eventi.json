@@ -4,6 +4,7 @@
            {
                "dataInizio": "date",
                "dataFine": "date",
+               "comune": "entity",
                "organizzazione": "entity",
                "categoria": "entity"
            }
