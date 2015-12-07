@@ -98,7 +98,7 @@ eventJson.forEach(function (e) {
 
 
     if (e.foto != undefined && e.foto !== "")
-        e.foto = e.urlComune + "/"+ e.foto;
+        e.foto = e.comune.url + "/"+ e.foto;
     e.id = "http://mapo.nexacenter.org/id/eventi/" + e.id;
     e.categoria = "http://mapo.nexacenter.org/id/eventi/categorie/" + e.categoria.replace(/ /g, '_');
     e.comune = "http://mapo.nexacenter.org/id/comuni/" + codIstat;
