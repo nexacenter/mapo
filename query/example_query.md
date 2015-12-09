@@ -42,3 +42,32 @@ where {
     FILTER (?elev >= 600)
 }
 ```
+
+###Eventi che si trovano all'interno di un rettangolo di coordinate
+```
+SELECT ?comune ?lat ?long ?name ?e
+WHERE {
+  ?x rdfs:label ?comune .
+  ?x <https://schema.org/latitude> ?lat .
+  ?x <https://schema.org/longitude> ?long .
+  ?e rdfs:label ?name .
+  ?e <http://dbpedia.org/ontology/city> ?x .
+  FILTER ( ?long > MIN_LONG && ?long < MAX_LONG && ?lat > MIN_LAT && ?lat < MAX_LAT)
+}
+LIMIT 100
+```
+
+###Eventi che si trovano all'interno di un raggio RADIUS di centro (YOUR_LAT,YOUR_LONG)
+```
+SELECT ?comune ?lat ?long ?name ?e
+WHERE {
+  ?x rdfs:label ?comune .
+  ?x <https://schema.org/latitude> ?lat .
+  ?x <https://schema.org/longitude> ?long .
+  ?e rdfs:label ?name .
+  ?e <http://dbpedia.org/ontology/city> ?x .
+  FILTER ( ?long > YOUR_LONG - RADIUS && ?long < YOUR_LONG + RADIUS && ?lat > YOUR_LAT - RADIUS && ?lat < YOUR_LAT + RADIUS)
+}
+LIMIT 100
+
+```
