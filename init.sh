@@ -3,8 +3,8 @@
 echo "Start at "$(date +%c)
 
 #scarica i json dalle API
-#echo "> Downloading"
-#TODO
+echo "> Downloading"
+./downloadEvents.sh
 
 #lavora sui json scaricati
 echo "> Working on events JSON"
